@@ -8,6 +8,14 @@ import scipy.io.wavfile
 import tempfile
 import json
 import os
+import atexit
+
+# عند الخروج، تحرير الذاكرة
+def cleanup():
+    global llm, qa, db
+    del llm, qa, db
+
+atexit.register(cleanup)
 
 # Load the vector DB
 embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/distiluse-base-multilingual-cased-v1")
@@ -15,7 +23,7 @@ db = FAISS.load_local("subjects_faiss_db", embedding_model, allow_dangerous_dese
 retriever = db.as_retriever()
 
 llm = Ollama(model="command-r7b-arabic")
-qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, chain_type="stuff")
+qa = RetrievalQA.from_ain_type(llm=llm, retriever=retriever, chain_type="stuff")
 
 print("How would you like to enter your question?")
 print("1 - Typing")

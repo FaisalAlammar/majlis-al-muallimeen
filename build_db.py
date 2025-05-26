@@ -16,7 +16,7 @@ for subject, pdf_path in subject_files:
     documents = loader.load()
     for doc in documents:
         doc.metadata["subject"] = subject
-    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
     chunks = splitter.split_documents(documents)
     for chunk in chunks:
         chunk.metadata["subject"] = subject

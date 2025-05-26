@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مجلس المعلمين</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- jsPDF لتصدير المحادثة -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <!-- هيدر ثابت فيه اللوقو والعنوان والأزرار -->
+  <header class="custom-header">
+    <div class="header-content">
+      <img src="/static/tuwaiaq-logo.png" alt="شعار طويق" class="logo-fixed">
+      <h1 class="chat-title">مجلس المعلمين</h1>
+      <div class="controls">
+        <button id="reset-btn">بدء محادثة جديدة</button>
+        <button id="download-btn">تصدير المحادثة</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="question" name="question" placeholder="اكتب سؤالك هنا..." required>
+      <button type="submit">إرسال</button>
+      <button type="button" id="voice-btn">🎤</button>
+    </form>
+  </div>
+
+  <script src="/static/app.js"></script>
+  <script>
+    window.jspdf = window.jspdf || jsPDF;
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/MohammadAlAwni/jspdf-arabic@master/dist/jspdf.plugin.arabic.js"></script>
+
+</body>
+</html>

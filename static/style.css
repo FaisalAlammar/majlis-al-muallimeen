@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
+
+/* الهيدر */
+.custom-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  background: #f7f4fc;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(155, 129, 222, 0.07);
+  border-bottom: 2px solid #e5d4fb;
+  height: 90px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-fixed {
+  width: 200px;
+  height: auto;
+  margin-left: 24px;
+}
+
+.header-content {
+  width: 100%;
+  max-width: 1900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0 3vw; /* هامش داخلي يمين ويسار */
+}
+.logo-fixed {
+  width: 110px;
+  height: auto;
+  margin-left: 12px;
+}
+.chat-title {
+  color: #5f259f;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 30px 0 0;
+  flex-grow: 1;
+  text-align: right;
+  font-family: 'Changa', sans-serif;
+}
+
+/* ترتيب الأزرار */
+.controls {
+  display: flex;
+  gap: 0.7rem;
+  margin-right: auto; /* تجعل الأزرار أقصى اليسار مع هامش */
+}
+.controls button {
+  background-color: #5f259f;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Changa', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.controls button:hover {
+  background-color: #431d75;
+}
+
+/* الشات شبه ممتد مع هامش خفيف يمين ويسار */
+.chat-container {
+  width: 92vw;
+  max-width: 1650px;
+  margin: 120px auto 2rem auto !important;
+  padding: 2.5rem 2vw;
+  background: #fefeff;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  position: relative;
+  min-height: 80vh;
+  border-top: 10px solid #5f259f;
+  transition: max-width 0.3s, width 0.3s;
+}
+
+/* صندوق الشات نفسه */
+#chat-box {
+  min-height: 400px;
+  max-height: 75vh;
+  overflow-y: auto;
+  background: #fbfaff;
+  border: 1px solid #ddd5f3;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 0 10px 1rem 10px;
+}
+
+/* رسائل المستخدم */
+.message.user {
+  background: #f5f0ff;
+  border-right: 4px solid #5f259f;
+  margin-left: auto;
+  text-align: right;
+  border-radius: 8px 0 0 8px;
+  max-width: 85%;
+  width: fit-content;
+  padding: 12px 18px;
+  direction: rtl;
+}
+/* رسائل المعلم */
+.message.teacher {
+  background: #ffffff;
+  border-right: 4px solid #a38fce;
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+  border-radius: 8px 0 0 8px;
+  max-width: 85%;
+  width: fit-content;
+  padding: 12px 18px;
+  direction: rtl;
+}
+.message.user,
+.message.teacher {
+  line-height: 1.6;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.3s ease-out;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+}
+
+/* فورم الشات */
+#chat-form {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: auto;
+  padding: 0 15px; 
+  margin-bottom: 15px;
+}
+#chat-form input {
+  flex: 1;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #c8b9e5;
+  font-size: 1rem;
+}
+#chat-form button {
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: #5f259f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 1rem;
+}
+#chat-form button:hover {
+  background: #471c78;
+}
+
+/* Loader */
+.loader {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #5f259f;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: 5px;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* تأثير الرسائل */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* للجوال والشاشات الصغيرة */
+@media (max-width: 1200px) {
+
+    .logo-fixed {
+    width: 130px;
+    margin-left: 8px;
+  }
+
+  .chat-container {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 1.2rem 0.5vw;
+  }
+  .header-content {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 2vw;
+  }
+  .chat-title {
+    font-size: 1.3rem;
+    margin: 0 10px 0 0;
+  }
+  #chat-form {
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0;
+  }
+  #chat-form input, #chat-form button {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.8rem;
+  }
+  .controls button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+body {
+  margin: 0;
+  font-family: 'Changa', sans-serif;
+  background: url('/static/tuwaiaq-bg.png') no-repeat top right, #f7f4fc;
+  background-size: 300px auto;
+  background-attachment: fixed;
+  color: #1e1e1e;
+  direction: rtl;
+}
