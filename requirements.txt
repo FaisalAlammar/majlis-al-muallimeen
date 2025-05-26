@@ -1,5 +1,9 @@
+fastapi
+uvicorn
 langchain==0.3.25
 langchain_community==0.3.24
+langchain-huggingface
+sentence-transformers
 faiss-cpu==1.11.0
 openai-whisper==20240930
 sounddevice==0.5.2
@@ -8,6 +12,8 @@ huggingface-hub==0.32.0
 pypdf==5.5.0
 ollama
 aiofiles>=0.8.0
+jinja2
+python-multipart
+gtts
 pdfkit>=0.6.1
 pyppeteer>=1.0.2
-asyncio>=3.4.3

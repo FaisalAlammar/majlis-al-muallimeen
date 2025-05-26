@@ -17,6 +17,76 @@ function removeLoader() {
   if (loader) loader.remove();
 }
 
+// دالة موحدة لعرض الرسائل وتدعم زر الصوت
+function addToChat(sender, message, audioFile = null) {
+  const box = document.getElementById("chat-box");
+  const msg = document.createElement("div");
+  msg.className = sender === "أنت" ? "message user" : "message teacher";
+  msg.style.display = "flex";
+  msg.style.alignItems = "flex-start"; // للمحاذاة من الأعلى
+  msg.style.direction = "rtl"; // دائمًا يمين لليسار (عربي)
+
+  // زر الصوت (يكون في البداية)
+  if (audioFile && sender !== "أنت") {
+    const playBtn = document.createElement("button");
+    playBtn.className = "audio-icon-btn";
+    playBtn.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 20 20" style="vertical-align: middle;">
+        <circle cx="10" cy="10" r="10" fill="#6a39b2"/>
+        <polygon points="7,6 15,10 7,14" fill="#fff"/>
+      </svg>
+    `;
+    playBtn.title = "تشغيل الصوت";
+    playBtn.style.marginLeft = "8px";
+    playBtn.style.marginRight = "2px";
+
+    // إعداد الصوت
+    const audio = new Audio(`/static/audio/${audioFile}`);
+    playBtn.onclick = function() {
+      if (!audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+        playBtn.innerHTML = `
+          <svg width="22" height="22" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="10" fill="#6a39b2"/>
+            <polygon points="7,6 15,10 7,14" fill="#fff"/>
+          </svg>
+        `;
+      } else {
+        audio.play();
+        playBtn.innerHTML = `
+          <svg width="22" height="22" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="10" fill="#6a39b2"/>
+            <rect x="7" y="6" width="2" height="8" fill="#fff"/>
+            <rect x="11" y="6" width="2" height="8" fill="#fff"/>
+          </svg>
+        `;
+      }
+    };
+    audio.onended = () => {
+      playBtn.innerHTML = `
+        <svg width="22" height="22" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r="10" fill="#6a39b2"/>
+          <polygon points="7,6 15,10 7,14" fill="#fff"/>
+        </svg>
+      `;
+    };
+
+    msg.appendChild(playBtn);
+  }
+
+  // نص الرسالة (يأخذ بقية المساحة)
+  const msgText = document.createElement("span");
+  msgText.textContent = message;
+  msgText.style.flex = "1";
+  msgText.style.display = "block";
+  msg.appendChild(msgText);
+
+  box.appendChild(msg);
+  box.scrollTop = box.scrollHeight;
+}
+
+
 // إرسال الأسئلة النصية
 document.getElementById("chat-form").addEventListener("submit", async function(e) {
   e.preventDefault();
@@ -41,7 +111,7 @@ document.getElementById("chat-form").addEventListener("submit", async function(e
   if (data.error) {
     addToChat("المعلم", "حدث خطأ: " + data.error);
   } else {
-    addToChat("المعلم", data.answer);
+    addToChat("المعلم", data.answer, data.audio_file); 
   }
 });
 
@@ -75,7 +145,7 @@ document.getElementById("voice-btn").addEventListener("click", async function() 
       if (data.error) {
         addToChat("المعلم", "حدث خطأ: " + data.error);
       } else {
-        addToChat("المعلم", data.answer);
+        addToChat("المعلم", data.answer, data.audio_file); // الصوت هنا أيضاً
       }
     };
     mediaRecorder.start();
@@ -103,17 +173,7 @@ document.getElementById("reset-btn").addEventListener("click", async function() 
   document.getElementById("chat-box").innerHTML = "";
 });
 
-// دالة مساعدة لعرض الرسائل
-function addToChat(sender, message) {
-  const box = document.getElementById("chat-box");
-  const msg = document.createElement("div");
-  msg.className = sender === "أنت" ? "message user" : "message teacher";
-  msg.textContent = message;
-  box.appendChild(msg);
-  box.scrollTop = box.scrollHeight;
-}
-
-
+// تصدير المحادثة كملف PDF
 document.getElementById("download-btn").addEventListener("click", async () => {
     try {
         const { jsPDF } = window.jspdf;

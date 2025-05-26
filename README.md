@@ -33,3 +33,30 @@
 
 - **This project is not guaranteed to work on Python 3.11+ or 3.13+**.
 - If you get errors about missing packages or incompatibility, check your Python version!
+
+
+
+# 🏫 Teachers’ Majlis
+
+**An interactive AI-powered platform for asking educational questions and getting instant answers in Arabic, with support for both text and audio.**
+
+---
+
+## 📖 Project Description
+
+Teachers’ Majlis is a smart web application that allows users to ask educational questions and receive instant, specialized answers powered by AI.  
+Key features include:
+- Text or voice (speech-to-text) question input.
+- Answer retrieval using a vector database (FAISS).
+- Conversational memory for each chat session.
+- Text-to-speech answer generation (with a button to play the answer in the chat).
+- PDF export for the chat conversation.
+- Modern, responsive UI for all devices.
+
+---
+
+## 🚀 Getting Started
+
+1. **Install Requirements:**
+   ```bash
+   pip install -r requirements.txt

@@ -17,7 +17,7 @@ import asyncio
 import aiofiles
 from uuid import uuid4
 from typing import Dict, List
-import time
+from gtts import gTTS
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -99,7 +99,19 @@ async def process_question(question: str, conversation_id: str) -> Dict:
         "question": question,
         "answer": response
     })
-    return {"answer": response, "conversation_id": conversation_id}
+    
+    tts = gTTS(text=answer, lang='ar')
+    audio_file_name = f"teacher_response_{conversation_id}.mp3"
+    audio_dir = "static/audio"
+    os.makedirs(audio_dir, exist_ok=True)
+    audio_path = os.path.join(audio_dir, audio_file_name)
+    tts.save(audio_path)
+
+    return {
+        "answer": response,
+        "audio_file": audio_file_name,
+        "conversation_id": conversation_id
+    }
 
 @app.post("/ask")
 async def ask_question(request: Request, question: str = Form(...)):

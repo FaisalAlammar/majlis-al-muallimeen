@@ -16,9 +16,9 @@
 }
 
 .logo-fixed {
-  width: 200px;
+  width: 130px;
   height: auto;
-  margin-left: 24px;
+  margin-left: 16px;
 }
 
 .header-content {
@@ -29,12 +29,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
-  padding: 0 3vw; /* هامش داخلي يمين ويسار */
-}
-.logo-fixed {
-  width: 110px;
-  height: auto;
-  margin-left: 12px;
+  padding: 0 3vw;
 }
 .chat-title {
   color: #5f259f;
@@ -50,7 +45,7 @@
 .controls {
   display: flex;
   gap: 0.7rem;
-  margin-right: auto; /* تجعل الأزرار أقصى اليسار مع هامش */
+  margin-right: auto;
 }
 .controls button {
   background-color: #5f259f;
@@ -74,29 +69,35 @@
 
 /* الشات شبه ممتد مع هامش خفيف يمين ويسار */
 .chat-container {
-  width: 92vw;
-  max-width: 1650px;
+  width: 95vw;
+  max-width: 1550px;
   margin: 120px auto 2rem auto !important;
-  padding: 2.5rem 2vw;
+  padding: 2.5rem 2vw 1.2rem 2vw;
   background: #fefeff;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
   border-radius: 18px;
   position: relative;
-  min-height: 80vh;
+  min-height: 70vh;
+  height: 76vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   border-top: 10px solid #5f259f;
   transition: max-width 0.3s, width 0.3s;
 }
 
 /* صندوق الشات نفسه */
 #chat-box {
-  min-height: 400px;
-  max-height: 75vh;
+  flex: 1 1 auto;
+  min-height: 360px;
+  max-height: 58vh;
   overflow-y: auto;
   background: #fbfaff;
   border: 1px solid #ddd5f3;
   padding: 1rem;
   border-radius: 12px;
   margin: 0 10px 1rem 10px;
+  transition: max-height 0.3s;
 }
 
 /* رسائل المستخدم */
@@ -132,15 +133,34 @@
   animation: fadeInUp 0.3s ease-out;
   margin-bottom: 1rem;
   white-space: pre-wrap;
+  position: relative;
 }
 
-/* فورم الشات */
+.audio-icon-btn {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 8px;
+  margin-top: 2px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+.audio-icon-btn:hover {
+  background: #471c7822;
+}
+
 #chat-form {
   display: flex;
   gap: 0.7rem;
   margin-top: auto;
-  padding: 0 15px; 
-  margin-bottom: 15px;
+  padding: 0 15px 0 15px;
+  margin-bottom: 0;
+  width: 100%;
+  align-items: flex-end;
+  background: transparent;
 }
 #chat-form input {
   flex: 1;
@@ -148,6 +168,7 @@
   border-radius: 8px;
   border: 1px solid #c8b9e5;
   font-size: 1rem;
+  background: #f7f4fc;
 }
 #chat-form button {
   padding: 0.9rem 1.2rem;
@@ -193,15 +214,16 @@
 
 /* للجوال والشاشات الصغيرة */
 @media (max-width: 1200px) {
-
-    .logo-fixed {
-    width: 130px;
+  .logo-fixed {
+    width: 90px;
     margin-left: 8px;
   }
 
   .chat-container {
     width: 98vw;
     max-width: 98vw;
+    min-height: 80vh;
+    height: 90vh;
     padding: 1.2rem 0.5vw;
   }
   .header-content {
@@ -217,6 +239,7 @@
     flex-direction: column;
     gap: 0.3rem;
     padding: 0;
+    margin-bottom: 10px;
   }
   #chat-form input, #chat-form button {
     font-size: 0.9rem;
@@ -227,6 +250,7 @@
     padding: 0.5rem 1rem;
   }
 }
+
 body {
   margin: 0;
   font-family: 'Changa', sans-serif;
@@ -235,4 +259,9 @@ body {
   background-attachment: fixed;
   color: #1e1e1e;
   direction: rtl;
+}
+
+#chat-form input,
+#chat-form input::placeholder {
+  font-family: 'Changa', sans-serif;
 }
